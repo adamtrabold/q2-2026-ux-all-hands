@@ -2023,8 +2023,8 @@
           // Framework slide (virtual slides 5, 6, 7 map to physical slide 4)
           return this.frameworkSlideIndex;
         } else if (virtualIndex >= this.skepticSlideIndex + 5 && virtualIndex < this.skepticSlideIndex + 5 + (this.makersSlideIndex - this.frameworkSlideIndex - 1)) {
-          // Between framework and makers (subtract 5 extra virtual slides)
-          return virtualIndex - 5;
+          // Between framework and makers (subtract 3 extra virtual slides: 1 from skeptic + 2 from framework)
+          return virtualIndex - 3;
         } else if (this.makersSlideIndex !== -1) {
           const virtualMakersStart = this.skepticSlideIndex + 5 + (this.makersSlideIndex - this.frameworkSlideIndex - 1);
           if (virtualIndex >= virtualMakersStart && virtualIndex < virtualMakersStart + 3) {
