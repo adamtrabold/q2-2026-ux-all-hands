@@ -1818,14 +1818,25 @@
     </div>
   </section>
 
-  <!-- ===== SLIDE 22: DEEP KNOWLEDGE → GREAT PRODUCTS ===== -->
-  <section class="slide">
+  <!-- ===== SLIDE 22: DEEP KNOWLEDGE → GREAT PRODUCTS (Progressive Reveal) ===== -->
+  <section class="slide" id="makers-slide" data-makers-state="0">
     <div class="grid-pattern"></div>
     <div class="slide-content center">
-      <div class="reveal-scale" style="display: flex; flex-direction: row; gap: clamp(1.5rem, 3vw, 3rem); max-width: 1100px; margin: 0 auto; align-items: center; justify-content: center;">
-        <img src="eames-lcw-chair.png" alt="Eames LCW Plywood Chair" style="width: clamp(160px, 22vw, 260px); height: auto; object-fit: contain; transform: translateY(10%);">
-        <img src="magsafe-connector.png" alt="Apple MagSafe Connector" style="width: clamp(200px, 26vw, 320px); height: auto; object-fit: contain;">
-        <img src="kraft-easy-mac.jpg" alt="Kraft Easy Mac Cup" style="width: clamp(150px, 20vw, 240px); height: auto; object-fit: contain; border-radius: 8px; transform: translateY(15%);">
+      <div class="framework-columns">
+        <!-- Column 1: Eames Chair -->
+        <div class="framework-column active" data-column="0">
+          <img src="eames-lcw-chair.png" alt="Eames LCW Plywood Chair" style="width: clamp(160px, 22vw, 260px); height: auto; object-fit: contain; transform: translateY(10%);">
+        </div>
+
+        <!-- Column 2: MagSafe -->
+        <div class="framework-column" data-column="1">
+          <img src="magsafe-connector.png" alt="Apple MagSafe Connector" style="width: clamp(200px, 26vw, 320px); height: auto; object-fit: contain;">
+        </div>
+
+        <!-- Column 3: Mac & Cheese -->
+        <div class="framework-column" data-column="2">
+          <img src="kraft-easy-mac.jpg" alt="Kraft Easy Mac Cup" style="width: clamp(150px, 20vw, 240px); height: auto; object-fit: contain; border-radius: 8px; transform: translateY(15%);">
+        </div>
       </div>
     </div>
   </section>
@@ -1937,9 +1948,11 @@
         this.physicalSlides = this.slides.length;
         this.skepticSlideIndex = Array.from(this.slides).findIndex(s => s.id === 'skeptic-slide');
         this.frameworkSlideIndex = Array.from(this.slides).findIndex(s => s.id === 'framework-slide');
+        this.makersSlideIndex = Array.from(this.slides).findIndex(s => s.id === 'makers-slide');
         // Skeptic slide has 2 states (without/with bigfoot) = +1 virtual slide
         // Framework slide has 3 states = +2 virtual slides
-        this.totalSlides = this.physicalSlides + 3; // Add 1 for skeptic + 2 for framework
+        // Makers slide has 3 states = +2 virtual slides
+        this.totalSlides = this.physicalSlides + 5; // Add 1 for skeptic + 2 for framework + 2 for makers
         this.progressBar = document.getElementById('progressBar');
         this.navDots = document.getElementById('navDots');
         this.slideNumber = document.getElementById('slideNumber');
@@ -2009,6 +2022,18 @@
         } else if (virtualIndex >= this.skepticSlideIndex + 2 && virtualIndex < this.skepticSlideIndex + 5) {
           // Framework slide (virtual slides 5, 6, 7 map to physical slide 4)
           return this.frameworkSlideIndex;
+        } else if (virtualIndex >= this.skepticSlideIndex + 5 && virtualIndex < this.skepticSlideIndex + 5 + (this.makersSlideIndex - this.frameworkSlideIndex - 1)) {
+          // Between framework and makers (subtract 5 extra virtual slides)
+          return virtualIndex - 5;
+        } else if (this.makersSlideIndex !== -1) {
+          const virtualMakersStart = this.skepticSlideIndex + 5 + (this.makersSlideIndex - this.frameworkSlideIndex - 1);
+          if (virtualIndex >= virtualMakersStart && virtualIndex < virtualMakersStart + 3) {
+            // Makers slide (3 virtual slides map to 1 physical)
+            return this.makersSlideIndex;
+          } else {
+            // After makers slide (subtract 5 to account for all extra virtual slides)
+            return virtualIndex - 5;
+          }
         } else {
           // After framework slide (subtract 3 to account for extra virtual slides)
           return virtualIndex - 3;
@@ -2019,6 +2044,7 @@
       physicalToVirtual(physicalIndex) {
         const skepticSlide = document.getElementById('skeptic-slide');
         const frameworkSlide = document.getElementById('framework-slide');
+        const makersSlide = document.getElementById('makers-slide');
 
         if (physicalIndex < this.skepticSlideIndex) {
           return physicalIndex;
@@ -2030,8 +2056,16 @@
           // Framework slide: return virtual index based on column state (add 2 for skeptic states)
           const state = parseInt(frameworkSlide.dataset.frameworkState);
           return this.skepticSlideIndex + 2 + state;
+        } else if (physicalIndex === this.makersSlideIndex && makersSlide) {
+          // Makers slide: return virtual index based on column state
+          const state = parseInt(makersSlide.dataset.makersState);
+          const virtualMakersStart = this.skepticSlideIndex + 5 + (this.makersSlideIndex - this.frameworkSlideIndex - 1);
+          return virtualMakersStart + state;
+        } else if (physicalIndex > this.makersSlideIndex && this.makersSlideIndex !== -1) {
+          // After makers slide
+          return physicalIndex + 5;
         } else {
-          // After framework slide
+          // After framework slide but before makers
           return physicalIndex + 3;
         }
       }
@@ -2463,6 +2497,7 @@
         const physicalIndex = this.virtualToPhysical(virtualIndex);
         const skepticSlide = document.getElementById('skeptic-slide');
         const frameworkSlide = document.getElementById('framework-slide');
+        const makersSlide = document.getElementById('makers-slide');
 
         // If navigating to skeptic slide, set the appropriate bigfoot state
         if (physicalIndex === this.skepticSlideIndex && skepticSlide) {
@@ -2474,6 +2509,13 @@
         if (physicalIndex === this.frameworkSlideIndex && frameworkSlide) {
           const state = virtualIndex - (this.skepticSlideIndex + 2); // 0, 1, or 2
           this.advanceFrameworkColumn(frameworkSlide, state);
+        }
+
+        // If navigating to makers slide, set the appropriate column state
+        if (physicalIndex === this.makersSlideIndex && makersSlide) {
+          const virtualMakersStart = this.skepticSlideIndex + 5 + (this.makersSlideIndex - this.frameworkSlideIndex - 1);
+          const state = virtualIndex - virtualMakersStart; // 0, 1, or 2
+          this.advanceMakersColumn(makersSlide, state);
         }
 
         // Navigate to the physical slide
@@ -2530,12 +2572,35 @@
         this.updateHash();
       }
 
+      advanceMakersColumn(makersSlide, newState) {
+        // Update the slide's state
+        makersSlide.dataset.makersState = newState;
+
+        // Update column active states
+        const columns = makersSlide.querySelectorAll('.framework-column');
+        columns.forEach((col, index) => {
+          if (index === newState) {
+            col.classList.add('active');
+          } else {
+            col.classList.remove('active');
+          }
+        });
+
+        // Update UI to reflect virtual slide change
+        this.updateProgress();
+        this.updateSlideNumber();
+        this.updateNavDots();
+        this.updateHash();
+      }
+
       goToSlide(index) {
         if (index >= 0 && index < this.physicalSlides) {
           const skepticSlide = document.getElementById('skeptic-slide');
           const skepticIndex = Array.from(this.slides).indexOf(skepticSlide);
           const frameworkSlide = document.getElementById('framework-slide');
           const frameworkIndex = Array.from(this.slides).indexOf(frameworkSlide);
+          const makersSlide = document.getElementById('makers-slide');
+          const makersIndex = Array.from(this.slides).indexOf(makersSlide);
 
           // If navigating TO the skeptic slide
           if (skepticSlide && index === skepticIndex) {
@@ -2551,6 +2616,14 @@
             // Coming from after: start at last column
             const startState = this.currentSlide < frameworkIndex ? 0 : 2;
             this.advanceFrameworkColumn(frameworkSlide, startState);
+          }
+
+          // If navigating TO the makers slide
+          if (makersSlide && index === makersIndex) {
+            // Coming from before: start at first column
+            // Coming from after: start at last column
+            const startState = this.currentSlide < makersIndex ? 0 : 2;
+            this.advanceMakersColumn(makersSlide, startState);
           }
 
           this.slides[index].scrollIntoView({ behavior: 'smooth' });
