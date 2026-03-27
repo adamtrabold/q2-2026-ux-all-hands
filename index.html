@@ -805,6 +805,22 @@
       100% { opacity: 0; r: 3; }
     }
 
+    /* Core principles circle rotation */
+    @keyframes rotate-circle {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes counter-rotate-translateX {
+      0% { transform: translateX(-50%) rotate(0deg); }
+      100% { transform: translateX(-50%) rotate(-360deg); }
+    }
+
+    @keyframes counter-rotate-translateY {
+      0% { transform: translateY(-50%) rotate(0deg); }
+      100% { transform: translateY(-50%) rotate(-360deg); }
+    }
+
     /* Breathing animation for concentric circles - handled in JS to combine with drift */
     .static-circle {
       transform-origin: center;
@@ -1441,29 +1457,29 @@
     <div class="gradient-accent top-left"></div>
     <div class="slide-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
       <h2 class="reveal" style="margin-bottom: 3rem;">Core principles unchanged</h2>
-      <div class="reveal-scale" style="position: relative; width: 500px; height: 500px;">
+      <div class="reveal-scale" id="core-principles-diagram" style="position: relative; width: 500px; height: 500px; animation: rotate-circle 20s linear infinite;">
         <!-- Curved arrows connecting the icons in a circle -->
         <svg viewBox="0 0 500 500" style="position: absolute; width: 100%; height: 100%; pointer-events: none; z-index: 0; left: 0; top: 0;">
           <!-- Arrow from PM right center to Research top center (clockwise) -->
-          <path d="M 295 55 Q 420 70, 430 205" stroke="#0ECAD4" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <path d="M 295 80 Q 420 95, 430 205" stroke="#0ECAD4" stroke-width="2.5" stroke-linecap="round" fill="none"/>
           <polyline points="425,199 430,205 435,199" stroke="#0ECAD4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
 
           <!-- Arrow from Research bottom center to Design right center (clockwise) -->
-          <path d="M 430 295 Q 420 430, 295 445" stroke="#0ECAD4" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-          <polyline points="301,440 295,445 301,450" stroke="#0ECAD4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 430 295 Q 420 405, 295 420" stroke="#0ECAD4" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <polyline points="301,415 295,420 301,425" stroke="#0ECAD4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
 
           <!-- Arrow from Design left center to Build bottom center (clockwise) -->
-          <path d="M 205 445 Q 80 430, 70 295" stroke="#0ECAD4" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <path d="M 205 420 Q 80 405, 70 295" stroke="#0ECAD4" stroke-width="2.5" stroke-linecap="round" fill="none"/>
           <polyline points="75,301 70,295 65,301" stroke="#0ECAD4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
 
           <!-- Arrow from Build top center to PM left center (clockwise) -->
-          <path d="M 70 205 Q 80 70, 205 55" stroke="#0ECAD4" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-          <polyline points="199,50 205,55 199,60" stroke="#0ECAD4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 70 205 Q 80 95, 205 80" stroke="#0ECAD4" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <polyline points="199,75 205,80 199,85" stroke="#0ECAD4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
         </svg>
 
         <!-- PM: Increase icon (top) -->
-        <div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%);">
-          <svg width="80" height="80" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div style="position: absolute; top: 46px; left: 50%; animation: counter-rotate-translateX 20s linear infinite;">
+          <svg width="68" height="68" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M16 111.5C16 110.119 17.1193 109 18.5 109H109.5C110.881 109 112 110.119 112 111.5C112 112.881 110.881 114 109.5 114H18.5C17.1193 114 16 112.881 16 111.5Z" fill="white"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M28 88.5C27.1716 88.5 26.5 89.1716 26.5 90V102C26.5 103.381 25.3807 104.5 24 104.5C22.6193 104.5 21.5 103.381 21.5 102V90C21.5 86.4101 24.4101 83.5 28 83.5H40C43.5898 83.5 46.5 86.4101 46.5 90V102C46.5 103.381 45.3807 104.5 44 104.5C42.6193 104.5 41.5 103.381 41.5 102V90C41.5 89.1716 40.8284 88.5 40 88.5H28Z" fill="white"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M58 60.5C57.1716 60.5 56.5 61.1716 56.5 62V102C56.5 103.381 55.3807 104.5 54 104.5C52.6193 104.5 51.5 103.381 51.5 102V62C51.5 58.4102 54.4101 55.5 58 55.5H70C73.5899 55.5 76.5 58.4102 76.5 62V102C76.5 103.381 75.3807 104.5 74 104.5C72.6193 104.5 71.5 103.381 71.5 102V62C71.5 61.1716 70.8284 60.5 70 60.5H58Z" fill="white"/>
@@ -1473,8 +1489,8 @@
         </div>
 
         <!-- Research: Person-to-person icon (right) -->
-        <div style="position: absolute; top: 50%; right: 25px; transform: translateY(-50%);">
-          <svg width="80" height="80" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div style="position: absolute; top: 50%; right: 36px; animation: counter-rotate-translateY 20s linear infinite;">
+          <svg width="68" height="68" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M68.9145 16.7287C69.8928 17.703 69.896 19.2859 68.9217 20.2642L64.5183 24.6854H91.5C97.299 24.6854 102 29.3864 102 35.1854V43.565C102 44.9457 100.881 46.065 99.5 46.065C98.1193 46.065 97 44.9457 97 43.565V35.1854C97 32.1479 94.5376 29.6854 91.5 29.6854H64.5183L68.9217 34.1067C69.896 35.085 69.8928 36.6679 68.9145 37.6422C67.9362 38.6165 66.3533 38.6133 65.379 37.635L56.7287 28.9496C55.7571 27.9741 55.7571 26.3967 56.7287 25.4212L65.379 16.7358C66.3533 15.7575 67.9362 15.7543 68.9145 16.7287ZM99.5 50.0142C100.881 50.0142 102 51.1335 102 52.5142V57.5C102 58.8807 100.881 60 99.5 60C98.1193 60 97 58.8807 97 57.5V52.5142C97 51.1335 98.1193 50.0142 99.5 50.0142Z" fill="#0ECAD4"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M55.0855 111.271C54.1072 110.297 54.104 108.714 55.0783 107.736L59.4817 103.315L36.5 103.315C30.701 103.315 26 98.6136 26 92.8146L26 84.435C26 83.0543 27.1193 81.935 28.5 81.935C29.8807 81.935 31 83.0543 31 84.435L31 92.8146C31 95.8521 33.4624 98.3146 36.5 98.3146L59.4817 98.3146L55.0783 93.8933C54.104 92.915 54.1072 91.3321 55.0855 90.3578C56.0638 89.3835 57.6467 89.3867 58.621 90.365L67.2713 99.0504C68.2429 100.026 68.2429 101.603 67.2713 102.579L58.621 111.264C57.6467 112.242 56.0638 112.246 55.0855 111.271ZM28.5 77.9858C27.1193 77.9858 26 76.8665 26 75.4858L26 70.5C26 69.1193 27.1193 68 28.5 68C29.8807 68 31 69.1193 31 70.5L31 75.4858C31 76.8665 29.8807 77.9858 28.5 77.9858Z" fill="#0ECAD4"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M27.166 30.7857C27.166 25.3903 31.5594 21 36.9993 21C42.4393 21 46.8327 25.3903 46.8327 30.7857C46.8327 36.1811 42.4393 40.5714 36.9993 40.5714C31.5594 40.5714 27.166 36.1811 27.166 30.7857ZM36.9993 16C28.8163 16 22.166 22.6107 22.166 30.7857C22.166 35.5783 24.4516 39.8332 27.9917 42.5338C25.1867 43.8692 22.8816 45.7892 21.0759 47.9857C17.6697 52.1292 16 57.2955 16 61.5001C16 62.8808 17.1193 64.0001 18.5 64.0001H55.5C56.8807 64.0001 58 62.8808 58 61.5001C58 57.2955 56.3303 52.1292 52.9242 47.9857C51.1184 45.7889 48.8129 43.8688 46.0076 42.5333C49.5473 39.8328 51.8327 35.578 51.8327 30.7857C51.8327 22.6107 45.1824 16 36.9993 16ZM52.7494 59.0001H21.2506C21.7379 56.4474 22.9439 53.5869 24.9383 51.1608C27.56 47.9717 31.5028 45.5715 37.0001 45.5715C42.4973 45.5715 46.4401 47.9717 49.0617 51.1608C51.0561 53.5869 52.2621 56.4474 52.7494 59.0001Z" fill="white"/>
@@ -1483,8 +1499,8 @@
         </div>
 
         <!-- Design: Site icon (bottom) -->
-        <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);">
-          <svg width="80" height="80" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div style="position: absolute; bottom: 46px; left: 50%; animation: counter-rotate-translateX 20s linear infinite;">
+          <svg width="68" height="68" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M23.5 36C23.5 34.6193 24.6193 33.5 26 33.5H32C33.3807 33.5 34.5 34.6193 34.5 36C34.5 37.3807 33.3807 38.5 32 38.5H26C24.6193 38.5 23.5 37.3807 23.5 36Z" fill="white"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M39.5 36C39.5 34.6193 40.6193 33.5 42 33.5H48C49.3807 33.5 50.5 34.6193 50.5 36C50.5 37.3807 49.3807 38.5 48 38.5H42C40.6193 38.5 39.5 37.3807 39.5 36Z" fill="white"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M81.5 36C81.5 34.6193 82.6193 33.5 84 33.5H102C103.381 33.5 104.5 34.6193 104.5 36C104.5 37.3807 103.381 38.5 102 38.5H84C82.6193 38.5 81.5 37.3807 81.5 36Z" fill="white"/>
@@ -1497,8 +1513,8 @@
         </div>
 
         <!-- Build: Dev icon (left) -->
-        <div style="position: absolute; top: 50%; left: 25px; transform: translateY(-50%);">
-          <svg width="80" height="80" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div style="position: absolute; top: 50%; left: 36px; animation: counter-rotate-translateY 20s linear infinite;">
+          <svg width="68" height="68" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M23.5 36C23.5 34.6193 24.6193 33.5 26 33.5H32C33.3807 33.5 34.5 34.6193 34.5 36C34.5 37.3807 33.3807 38.5 32 38.5H26C24.6193 38.5 23.5 37.3807 23.5 36Z" fill="white"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M39.5 36C39.5 34.6193 40.6193 33.5 42 33.5H48C49.3807 33.5 50.5 34.6193 50.5 36C50.5 37.3807 49.3807 38.5 48 38.5H42C40.6193 38.5 39.5 37.3807 39.5 36Z" fill="white"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M81.5 36C81.5 34.6193 82.6193 33.5 84 33.5H102C103.381 33.5 104.5 34.6193 104.5 36C104.5 37.3807 103.381 38.5 102 38.5H84C82.6193 38.5 81.5 37.3807 81.5 36Z" fill="white"/>
@@ -1575,9 +1591,9 @@
     <div class="gradient-accent center"></div>
     <div class="slide-content center">
       <div class="accent-bar reveal"></div>
-      <div class="reveal" style="line-height: 1.1;">
+      <div class="reveal" style="line-height: 1.2; padding-bottom: 0.25em;">
         <div style="font-family: var(--font-body); font-weight: 500; margin-bottom: 0.1em; color: #FFFFFF; font-size: var(--h2-size);">we can</div>
-        <div style="font-family: var(--font-display); font-weight: 700; font-style: italic; font-size: clamp(2rem, 7vw, 5.5rem); background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">finally cook</div>
+        <div style="font-family: var(--font-display); font-weight: 700; font-style: italic; font-size: clamp(2rem, 7vw, 5rem); background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">finally cook</div>
       </div>
     </div>
   </section>
