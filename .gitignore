@@ -1,0 +1,11 @@
+# Backup files
+*-backup*.html
+*-temp.html
+*-restore.html
+*.bak
+
+# System files
+.DS_Store
+*.txt
+
+# Keep only the main presentation and required images
