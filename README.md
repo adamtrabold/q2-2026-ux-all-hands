@@ -22,9 +22,10 @@ Or download and open `index.html` in a web browser.
 ## Assets
 
 - `index.html` — Main presentation file
+- `Presenter Notes - Q2 2026 UX All Hands.md` — Clean speaker notes for delivering the talk
+- `Q2 2026 UX All Hands - Slide Deck.md` — Full slide script with visual concepts
 - `bigfoot.png` — Skeptic framework visual
 - `eames-lcw-chair.png` — Eames example (deep knowledge → great products)
 - `kraft-easy-mac.jpg` — Kraft Mac & Cheese example
 - `magsafe-connector.png` — Apple MagSafe example
 - `spiderman-hanging.png` — "Nimble, not just fast" visual
-- `Q2 2026 UX All Hands - Slide Deck.md` — Slide script and speaker notes
