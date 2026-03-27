@@ -4,7 +4,9 @@ Presentation slides for the Q2 2026 UX team all hands meeting, focusing on the t
 
 ## Viewing the Presentation
 
-Open `q2-2026-ux-all-hands-evolution.html` in a web browser.
+**Live URL:** https://adamtrabold.github.io/q2-2026-ux-all-hands/
+
+Or download and open `index.html` in a web browser.
 
 **Navigation:**
 - Arrow keys or click to advance slides
@@ -19,7 +21,7 @@ Open `q2-2026-ux-all-hands-evolution.html` in a web browser.
 
 ## Assets
 
-- `q2-2026-ux-all-hands-evolution.html` — Main presentation file
+- `index.html` — Main presentation file
 - `bigfoot.png` — Skeptic framework visual
 - `eames-lcw-chair.png` — Eames example (deep knowledge → great products)
 - `kraft-easy-mac.jpg` — Kraft Mac & Cheese example
