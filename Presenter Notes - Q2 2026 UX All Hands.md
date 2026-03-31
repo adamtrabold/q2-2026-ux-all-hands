@@ -71,7 +71,7 @@ The reality is that it's not our responsibilities that have changed, but the sma
 
 ---
 
-## Slide 13 — ⭐ S.T.A.R. MOMENT
+## Slide 13
 But this brings me to why I’m excited instead of terrified right now. I believe we are actually positioned the best we have ever been if we can take advantage of this moment. If we were "cooked" every time someone said we were on twitter, we would all be working at Walgreens already. The entire field of UX, our entire industry, was built with our hands tied behind our backs. Businesses do not inherently understand the gaps between them and their customers. Research and Design are often viewed as expenses, not value creators. You can reasonably guess how much your MRR will go up with a new sales hire. You can't do that with our roles. Good with a capital G work has been an uphill battle since the beginning of the industry. To borrow the cooked metaphor — if anything, it's been like being a head chef forced to communicate to their staff, create the menu, and grow the business entirely via Instagram posts. We are not cooked — we can **finally** cook! And yet, we exist within and have created a particular environment where our work is deeply valued and drives decisions. 
 
 ---
